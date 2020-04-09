@@ -1,6 +1,5 @@
 import {listWallets} from "../../lodestar/wallet/wallet";
 
-
 export const command = 'list';
 export const desc = 'List wallets';
 export const builder = {};

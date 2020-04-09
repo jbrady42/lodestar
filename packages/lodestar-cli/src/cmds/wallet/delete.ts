@@ -1,6 +1,15 @@
-export const command = 'delete';
+import {removeWallet} from "../../lodestar/wallet/wallet";
+
+
+export const command = 'delete <key>';
 export const desc = 'Delete wallet';
-export const builder = {};
+export function builder(yargs: any) {
+  yargs.positional("key", {
+    type: "string",
+    desc: "Key to delete"
+  })
+}
 export function handler(argv: any) {
-  console.log("YOYOYO");
+  removeWallet(argv.key);
+  console.log("Wallet deleted");
 }

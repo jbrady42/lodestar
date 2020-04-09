@@ -22,6 +22,20 @@ export function removeWallet(key: string) {
   }
 }
 
+export function recoverWallet(): string {
+  // Prompt for mnemonic
+  // Generate keys
+  // Create folder
+  // Write keys
+  //Return name
+  return "";
+}
+
 export function newWallet(): string {
+  // Generate keys
+  // Create folder
+  // Write keys
+  // Print mnemonic
+  //Return name
   return "";
 }
