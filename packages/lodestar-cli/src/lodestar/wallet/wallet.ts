@@ -1,15 +1,25 @@
 import {Keypair} from "@chainsafe/bls";
+import fs from "fs";
 
-const configDir = ".config"
+const home = process.env.HOME;
+const walletsDir = [home, ".config", "lodestar", "wallets"].join("/");
 
-const walletDir = "wallets"
-
-export function listWallets(): Array<string> {
-  return [];
+if(!fs.existsSync(walletsDir)) {
+  fs.mkdirSync(walletsDir, { recursive: true });
 }
 
-export function removeWallet() {
+export async function listWallets(): Promise<Array<string>> {
+  const files = await fs.promises.readdir(walletsDir);
+  const filtered = files.filter((x) => x.startsWith("0x"));
+  return filtered;
+}
 
+export function removeWallet(key: string) {
+  const dir = walletsDir+"/"+key;
+  if(fs.existsSync(dir)) {
+    // Do important other cleanup
+    fs.rmdirSync(dir)
+  }
 }
 
 export function newWallet(): string {
