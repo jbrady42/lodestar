@@ -14,12 +14,14 @@ export async function listWallets(): Promise<Array<string>> {
   return filtered;
 }
 
-export function removeWallet(key: string) {
+export function removeWallet(key: string): boolean {
   const dir = walletsDir+"/"+key;
-  if(fs.existsSync(dir)) {
-    // Do important other cleanup
-    fs.rmdirSync(dir)
+  if(!fs.existsSync(dir)) {
+    return false;
   }
+    // Do important other cleanup
+  fs.rmdirSync(dir)
+  return true;
 }
 
 export function recoverWallet(): string {
